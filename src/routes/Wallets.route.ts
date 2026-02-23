@@ -1,3 +1,3 @@
 import { Router } from "express";
-const WalletsRouter  = Router()
-
+const WalletsRouter  : Router = Router()
+export default WalletsRouter
