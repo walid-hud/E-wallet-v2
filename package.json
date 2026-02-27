@@ -6,8 +6,8 @@
   "type": "module",
   "scripts": {
     "test": "vitest",
-    "start": "node server.js",
-    "dev":"ts-node ./src/server.ts"
+    "start": "node  ./dist/server.js",
+    "build":"tsc"
   },
   "repository": {
     "type": "git",

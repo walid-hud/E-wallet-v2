@@ -1,13 +1,6 @@
 import type { Request, Response } from "express";
 import store from "../data/index.js";
-
-const send_error = (res: Response, status: number, error: string) => {
-  return res.status(status).json({ success: false, error });
-};
-
-const send_success = (res: Response, payload: object) => {
-  return res.status(200).json({ success: true, error: null, ...payload });
-};
+import { is_valid_positive_integer, send_error, send_success } from "../utils/index.js";
 
 export const create_wallet = (req: Request, res: Response) => {
   const { name, user_id } = req.body ?? {};
@@ -93,7 +86,7 @@ export const deposit_to_wallet = (req: Request, res: Response) => {
     return send_error(res, 400, "invalid request");
   }
 
-  if (!amount || isNaN(amount) || amount < 1 || !Number.isInteger(amount)) {
+  if (!is_valid_positive_integer(amount)) {
     return send_error(res, 400, "invalid amount");
   }
 
@@ -115,7 +108,7 @@ export const withdraw_from_wallet = (req: Request, res: Response) => {
     return send_error(res, 400, "invalid request");
   }
 
-  if (!amount || isNaN(amount) || amount < 1 || !Number.isInteger(amount)) {
+  if (!is_valid_positive_integer(amount)) {
     return send_error(res, 400, "invalid amount");
   }
 

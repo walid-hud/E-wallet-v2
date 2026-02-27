@@ -1,13 +1,6 @@
 import type { Request, Response } from "express";
 import store from "../data/index.js";
-
-const send_error = (res: Response, status: number, error: string) => {
-  return res.status(status).json({ success: false, error });
-};
-
-const send_success = (res: Response, payload: object) => {
-  return res.status(200).json({ success: true, error: null, ...payload });
-};
+import { send_error, send_success } from "../utils/index.js";
 
 export const get_user_by_id = (req: Request, res: Response) => {
   const id = req.params.id as string;
